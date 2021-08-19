@@ -1,0 +1,63 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Aug 19 22:23:57 2021
+
+@author: laukkara
+
+Jos ei pysty antamaan kunnon arviota siitä, että millaiset olosuhteet
+rakenteeseen muodostuu, niin pystyykö silloin rakennetta ylipäätään
+kohtuullisella tarkkuudella edes suunnittelemaan?
+
+
+"""
+print('Begin!')
+
+
+import os
+import pandas as pd
+
+import trh
+
+
+
+case_name = 'US_1'
+
+fname_input = os.path.join(r'C:\Local\laukkara\Data\github\trh-1',
+                           'database_read_only', case_name, 'data.txt')
+
+output_folder = os.path.join(r'C:\Local\laukkara\Data\OneDrive - TUNI.fi' \
+                             r'\Rakennusfysiikka 2021\T RH mittaukset',
+                             'output', case_name)
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
+
+
+
+data = pd.read_csv(fname_input,
+                   header=[0,1])
+
+T_i = data.loc[:, ('sisailma', 'T')]
+RH_i = data.loc[:, ('sisailma', 'RH')]
+
+T_e = data.loc[:, ('fmi', 'T')]
+RH_e = data.loc[:, ('fmi', 'RH')]
+
+measurement_point_name = 'nurkka_oik_alh_MWup'
+T_x = data.loc[:, (measurement_point_name, 'T')]
+RH_x = data.loc[:, (measurement_point_name, 'RH')]
+
+
+
+
+trh.Trh(T_i, RH_i,
+        T_e, RH_e,
+        T_x, RH_x,
+        output_folder,
+        measurement_point_name)
+
+
+
+
+
+
+print('End!')
