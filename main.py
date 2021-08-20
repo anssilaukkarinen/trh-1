@@ -14,8 +14,9 @@ print('Begin!')
 
 
 import os
+import numpy as np
 import pandas as pd
-
+import matplotlib.pyplot as plt
 import trh
 
 
@@ -55,17 +56,12 @@ T_x = data.loc[:, (measurement_point_name, 'T')]
 RH_x = data.loc[:, (measurement_point_name, 'RH')]
 
 
-
-
 obj = trh.Trh(T_i, RH_i,
                 T_e, RH_e,
                 T_x, RH_x,
                 output_folder,
                 measurement_point_name,
                 measurement_point_MG_classes)
-
-
-
 
 
 

@@ -66,6 +66,9 @@ class Trh():
         # id 4: M_max < 1
         self.calc_M_max()
         
+        # id 4 and 5: VI and TI
+        self.calc_VI_TI()
+        
         
         with open(self.fname_logfile, mode='a') as f:
             time_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -186,7 +189,7 @@ class Trh():
         fig = plt.figure()
         ax = fig.gca()
         ax.plot(x, y)
-        ax.set_xlabel('RH_x, %')
+        ax.set_xlabel('RHx, %')
         ax.set_ylabel('ecdf, 0-1')
         ax.set_xlim((-2, 102))
         ax.grid()
@@ -199,7 +202,7 @@ class Trh():
         fig = plt.figure()
         ax = fig.gca()
         ax.plot(y, x)
-        ax.set_ylabel('RH_x, %')
+        ax.set_ylabel('RHx, %')
         ax.set_xlabel('ecdf, 0-1')
         ax.set_ylim((-2, 102))
         ax.grid()
@@ -330,28 +333,97 @@ class Trh():
             f.write('\n')
         
         
-        
-        
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
-
+    @staticmethod
+    def vsat(T):
+        # Calculate saturation vapour pressure
+        pvsat = 611.2*np.exp((17.62*T)/(243.12+T))
+        v_sat = pvsat/(461.5*(T+273.15))
+        return(v_sat)
     
     
-    
-    
+    def calc_VI_TI(self):
+        # Calculate dv, dT, VI and TI
+        # Tx = Ti - (Ry/Rtot)*(Ti-Te) -> (Ry/Rtot) = (Ti-Tx)/(Ti-Te)
+        # Tx = Te + (Rx/Rtot)*(Ti-Te) -> (Rx/Rtot) = (Tx-Te)/(Ti-Te) = TI
+        
+        # Calculations
+        dT_x_e = self.T_x - self.T_e
+        dT_i_e = self.T_i - self.T_e
+        self.TI = dT_x_e.rolling(12*6).mean() / dT_i_e.rolling(12*6).mean()
         
         
+        self.v_i = 1000.0 * self.vsat(self.T_i) * (self.RH_i / 100.0)
+        self.v_e = 1000.0 * self.vsat(self.T_e) * (self.RH_e / 100.0)
+        self.v_x = 1000.0 * self.vsat(self.T_x) * (self.RH_x / 100.0)
+        
+        dv_x_e = self.v_x - self.v_e
+        dv_i_e = self.v_i - self.v_e
+        self.VI = dv_x_e.rolling(12*6).mean() / dv_i_e.rolling(12*6).mean()
         
         
+        # Plotting, dTdT and dvdv
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.xaxis.set_major_formatter(self.xaxis_fmt)
+        fig.autofmt_xdate()
+        ax.plot(dT_i_e, linewidth=0.7)
+        ax.plot(dT_x_e, linewidth=0.7)
+        ax.grid()
+        ax.legend(['dT_i_e', 'dT_x_e'])
+        ax.set_ylabel('dT, C')
+        fname = os.path.join(self.output_folder,
+                             'dT_dT_' + self.measurement_point_name + '.png')
+        fig.savefig(fname, dpi=100, bbox_inches='tight')
+        plt.close(fig)
         
-    
-    
+        
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.xaxis.set_major_formatter(self.xaxis_fmt)
+        fig.autofmt_xdate()
+        ax.plot(dv_i_e, linewidth=0.7)
+        ax.plot(dv_x_e, linewidth=0.7)
+        ax.grid()
+        ax.legend(['dv_i_e', 'dv_x_e'])
+        ax.set_ylabel('dv, g/m3')
+        fname = os.path.join(self.output_folder,
+                             'dv_dv_' + self.measurement_point_name + '.png')
+        fig.savefig(fname, dpi=100, bbox_inches='tight')
+        plt.close(fig)
+        
+        
+        # plotting, TI and VI
+        ylim_min_TI = np.percentile( self.TI[~self.TI.isna()] , 2)
+        ylim_max_TI = np.percentile( self.TI[~self.TI.isna()] , 98)
+        
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.xaxis.set_major_formatter(self.xaxis_fmt)
+        fig.autofmt_xdate()
+        ax.plot(self.TI, '.', markersize=0.5)
+        ax.grid()
+        ax.set_ylabel('TI = (Tx-Te)/(Ti-Te), -')
+        ax.set_ylim((ylim_min_TI, ylim_max_TI))
+        fname = os.path.join(self.output_folder,
+                             'TI_' + self.measurement_point_name + '.png')
+        fig.savefig(fname, dpi=100, bbox_inches='tight')
+        plt.close(fig)
+        
+        
+        ylim_min_VI = np.percentile( self.VI[~self.VI.isna()] , 5)
+        ylim_max_VI = np.percentile( self.VI[~self.VI.isna()] , 95)
+        
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.xaxis.set_major_formatter(self.xaxis_fmt)
+        fig.autofmt_xdate()
+        ax.plot(self.VI, '.', markersize=0.5)
+        ax.grid()
+        ax.set_ylabel('VI = (vx-ve)/(vi-ve), -')
+        ax.set_ylim((ylim_min_VI, ylim_max_VI))
+        fname = os.path.join(self.output_folder,
+                             'VI_' + self.measurement_point_name + '.png')
+        fig.savefig(fname, dpi=100, bbox_inches='tight')
+        plt.close(fig)
+        
+        
