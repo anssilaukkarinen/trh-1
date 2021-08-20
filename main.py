@@ -34,7 +34,9 @@ if not os.path.exists(output_folder):
 
 
 data = pd.read_csv(fname_input,
-                   header=[0,1])
+                   header=[0,1],
+                   index_col=0,
+                   parse_dates=[0])
 
 T_i = data.loc[:, ('sisailma', 'T')]
 RH_i = data.loc[:, ('sisailma', 'RH')]
