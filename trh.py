@@ -8,6 +8,7 @@ Created on Thu Aug 19 22:28:36 2021
 import os
 import datetime
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
@@ -41,7 +42,7 @@ class Trh():
         self.measurement_point_name = measurement_point_name
         
         self.fname_logfile = os.path.join(self.output_folder, 'log.txt')
-        with open(self.fname_logfile, 'w') as f:
+        with open(self.fname_logfile, mode='w', encoding='utf-8') as f:
             f.write('TRH-1 log file\n')
             time_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             f.write('Starting at ' + time_str + '\n\n')
@@ -164,6 +165,7 @@ class Trh():
             f.write('RH_x empirical cumulative distribution function:\n')
             f.write('<Percentile 0-100> <RH 0-100>\n')
             np.savetxt(f, self.RH_x_ecdf, fmt='%.02f')
+            f.write('\n\n')
         
         
         # Plot, cdf
@@ -178,7 +180,7 @@ class Trh():
         fname = os.path.join(self.output_folder,
                              'RH_x_ecdf_' + self.measurement_point_name  + '.png')
         fig.savefig(fname, dpi=100, bbox_inches='tight')
-        plt.close()
+        plt.close(fig)
         
         # Plot, icdf
         fig = plt.figure()
@@ -190,12 +192,89 @@ class Trh():
         fname = os.path.join(self.output_folder,
                              'RH_x_icdf_' + self.measurement_point_name + '.png')
         fig.savefig(fname, dpi=100, bbox_inches='tight')
-        plt.close()
+        plt.close(fig)
         
+    
+    @staticmethod
+    def calc_RH_crit(T):
+        n = len(T)
+        RH_crit = np.zeros(n)
         
+        for idx in range(n):
+            
+            if T[idx] <= 1.0:
+                RH_crit[idx] = 0.83*T[idx] + 97.0
+            else:
+                RH_crit[idx] = \
+                    np.maximum(-0.00267*T[idx]**3 + 0.16*T[idx]**2 - 3.13*T[idx] + 100.0,
+                               80.0)
+        return(RH_crit)
+
+    
+    
+    
             
     def calc_RH_x_crit(self):
         # Use both RH and T to create a two-dimensional limit curve
+        
+        self.RH_x_crit = self.calc_RH_crit(self.T_x)
+                
+        
+        # plot
+        T_min = self.T_x.min()
+        T_max = self.T_x.max()
+        T_vals = np.linspace(start=T_min, stop=T_max)
+        RH_vals = self.calc_RH_crit(T_vals)
+        
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.plot(self.T_x, self.RH_x, '.', markersize=0.6)
+        ax.plot(T_vals, RH_vals)
+        ax.set_xlabel('T, C')
+        ax.set_ylabel('RH, %')
+        ax.grid()
+        fname = os.path.join(self.output_folder,
+                             'RH_x_crit_scatter_' \
+                                 + self.measurement_point_name + '.png')
+        fig.savefig(fname, dpi=100, bbox_inches='tight')
+        plt.close(fig)
+        
+        
+        # Proportion of points over the curve
+        n_pos = np.sum(self.RH_x > self.RH_x_crit)
+        n_tot = len(self.RH_x)
+        
+        s = 'Datapisteiden määrä rajakäyrän yläpuolella: {} kpl / {} kpl = {} %' \
+            .format(n_pos, n_tot, np.round(100*n_pos/n_tot, 2))
+        print(s)
+        
+        with open(self.fname_logfile, 'a') as f:
+            f.write(s + '\n')
+            f.write('\n\n')
+        
+        
+        # Total time over the curve
+        idxs = self.RH_x > self.RH_x_crit
+        
+        dt_total = self.RH_x.index.to_series().diff().sum()
+        dt_over_curve = self.RH_x.index.to_series().diff().loc[idxs].sum()
+        
+        n_total_days = dt_total / pd.Timedelta(days=1)
+        n_over_curve_days = dt_over_curve / pd.Timedelta(days=1)
+        
+        
+        s = 'Aika rajakäyrän yläpuolella: {} vrk / {} vrk = {} %' \
+            .format(n_over_curve_days, n_total_days,
+                    np.round(100*n_over_curve_days/n_total_days, 2))
+        print(s)
+        with open(self.fname_logfile, 'a') as f:
+            f.write(s + '\n')
+            f.write('\n\n')
+    
+        
+        
+        
+            
         
         
         
