@@ -12,6 +12,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+import fmgm
+
 
 
 class Trh():
@@ -26,7 +28,8 @@ class Trh():
                  T_e, RH_e,
                  T_x, RH_x,
                  output_folder,
-                 measurement_point_name):
+                 measurement_point_name,
+                 measurement_point_MG_classes):
         
         # Initialisations
         self.T_i = T_i
@@ -40,12 +43,14 @@ class Trh():
         
         self.output_folder = output_folder
         self.measurement_point_name = measurement_point_name
+        self.measurement_point_MG_classes = measurement_point_MG_classes
         
-        self.fname_logfile = os.path.join(self.output_folder, 'log.txt')
+        self.fname_logfile = os.path.join(self.output_folder,
+                                          'log_' + self.measurement_point_name + '.txt')
         with open(self.fname_logfile, mode='w', encoding='utf-8') as f:
             f.write('TRH-1 log file\n')
             time_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            f.write('Starting at ' + time_str + '\n\n')
+            f.write('Starting at: ' + time_str + '\n\n')
         
         
         
@@ -55,11 +60,16 @@ class Trh():
         # id 1: Comparison to maximum value
         self.calc_RH_x_ecdf()
         
-        # id 2: Comparison to critical values
+        # id 2 and 3: Comparison to critical values
         self.calc_RH_x_crit()
         
-        # Add other indicator variables here...
-        # Lue artikkelista, että mitä tähän voisi sopia
+        # id 4: M_max < 1
+        self.calc_M_max()
+        
+        
+        with open(self.fname_logfile, mode='a') as f:
+            time_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            f.write('Ending at: ' + time_str + '\n\n')
         
         
     
@@ -161,11 +171,13 @@ class Trh():
             self.RH_x_ecdf[idx, 0] = p_val
             self.RH_x_ecdf[idx, 1] = np.percentile(self.RH_x, p_val)
         
+        print('np.percentile(RH_x, 99): {:0.1f}'.format(self.RH_x.values[0]))
+        
         with open(self.fname_logfile, 'a') as f:
             f.write('RH_x empirical cumulative distribution function:\n')
             f.write('<Percentile 0-100> <RH 0-100>\n')
             np.savetxt(f, self.RH_x_ecdf, fmt='%.02f')
-            f.write('\n\n')
+            f.write('\n')
         
         
         # Plot, cdf
@@ -176,6 +188,7 @@ class Trh():
         ax.plot(x, y)
         ax.set_xlabel('RH_x, %')
         ax.set_ylabel('ecdf, 0-1')
+        ax.set_xlim((-2, 102))
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'RH_x_ecdf_' + self.measurement_point_name  + '.png')
@@ -188,6 +201,7 @@ class Trh():
         ax.plot(y, x)
         ax.set_ylabel('RH_x, %')
         ax.set_xlabel('ecdf, 0-1')
+        ax.set_ylim((-2, 102))
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'RH_x_icdf_' + self.measurement_point_name + '.png')
@@ -232,6 +246,7 @@ class Trh():
         ax.plot(T_vals, RH_vals)
         ax.set_xlabel('T, C')
         ax.set_ylabel('RH, %')
+        ax.set_ylim((-2, 102))
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'RH_x_crit_scatter_' \
@@ -244,13 +259,14 @@ class Trh():
         n_pos = np.sum(self.RH_x > self.RH_x_crit)
         n_tot = len(self.RH_x)
         
-        s = 'Datapisteiden määrä rajakäyrän yläpuolella: {} kpl / {} kpl = {} %' \
-            .format(n_pos, n_tot, np.round(100*n_pos/n_tot, 2))
+        s = 'Datapisteiden määrä rajakäyrän yläpuolella: ' \
+            '{} kpl / {} kpl = {:0.1f} %' \
+            .format(n_pos, n_tot, 100*n_pos/n_tot)
         print(s)
         
         with open(self.fname_logfile, 'a') as f:
             f.write(s + '\n')
-            f.write('\n\n')
+            f.write('\n')
         
         
         # Total time over the curve
@@ -263,18 +279,58 @@ class Trh():
         n_over_curve_days = dt_over_curve / pd.Timedelta(days=1)
         
         
-        s = 'Aika rajakäyrän yläpuolella: {} vrk / {} vrk = {} %' \
+        s = 'Aika rajakäyrän yläpuolella: ' \
+            '{} vrk / {} vrk = {:0.1f} %' \
             .format(n_over_curve_days, n_total_days,
-                    np.round(100*n_over_curve_days/n_total_days, 2))
+                    100*n_over_curve_days/n_total_days)
         print(s)
         with open(self.fname_logfile, 'a') as f:
             f.write(s + '\n')
-            f.write('\n\n')
+            f.write('\n')
     
         
         
         
             
+    def calc_M_max(self):
+        # Calculate the maximum mould index from the measurement period
+        # It would be good to have at least one year of data
+        
+        # Calculations
+        T_x_M = self.T_x.resample('1h').interpolate('index')
+        RH_x_M = self.RH_x.resample('1h').interpolate('index')
+        
+        t_idx = RH_x_M.index
+        
+        M_x_dummy = fmgm.MI(T_x_M,
+                            RH_x_M,
+                            self.measurement_point_MG_classes['MG_speed'],
+                            self.measurement_point_MG_classes['MG_max'],
+                            self.measurement_point_MG_classes['C_mat'])
+        self.M_x = pd.DataFrame(data=M_x_dummy,
+                                index=t_idx)
+        
+        self.M_x_max = np.max(self.M_x).values[0]
+        
+        
+        # Plot
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.plot(self.M_x)
+        fname = os.path.join(self.output_folder,
+                             'M_x_' + self.measurement_point_name + '.png')
+        fig.savefig(fname, dpi=100, bbox_inches='tight')
+        
+        
+        # print to terminal and file
+        s = 'M_x_max: {}'.format( self.M_x_max )
+        print(s)
+        with open(self.fname_logfile, 'a') as f:
+            f.write(s + '\n')
+            f.write('\n')
+        
+        
+        
         
         
         
