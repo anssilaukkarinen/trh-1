@@ -88,6 +88,7 @@ class Trh():
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
         fig.autofmt_xdate()
         ax.plot(self.T_i.index, self.T_i.values)
+        ax.set_ylabel('T, C')
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'T_i.png')
@@ -99,6 +100,7 @@ class Trh():
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
         fig.autofmt_xdate()
         ax.plot(self.RH_i.index, self.RH_i.values)
+        ax.set_ylabel('RH, 0-100 %')
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'RH_i.png')
@@ -112,6 +114,7 @@ class Trh():
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
         fig.autofmt_xdate()
         ax.plot(self.T_e.index, self.T_e.values)
+        ax.set_ylabel('T, C')
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'T_e.png')
@@ -123,6 +126,7 @@ class Trh():
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
         fig.autofmt_xdate()
         ax.plot(self.RH_e.index, self.RH_e.values)
+        ax.set_ylabel('RH, 0-100 %')
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'RH_e.png')
@@ -137,6 +141,7 @@ class Trh():
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
         fig.autofmt_xdate()
         ax.plot(self.T_x.index, self.T_x.values)
+        ax.set_ylabel('T, C')
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'T_x_' + self.measurement_point_name + '.png')
@@ -148,6 +153,7 @@ class Trh():
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
         fig.autofmt_xdate()
         ax.plot(self.RH_x.index, self.RH_x.values)
+        ax.set_ylabel('RH, 0-100 %')
         ax.grid()
         fname = os.path.join(self.output_folder,
                              'RH_x_' + self.measurement_point_name + '.png')
@@ -369,8 +375,8 @@ class Trh():
         ax.plot(dT_i_e, linewidth=0.7)
         ax.plot(dT_x_e, linewidth=0.7)
         ax.grid()
-        ax.legend(['dT_i_e', 'dT_x_e'])
-        ax.set_ylabel('dT, C')
+        ax.legend(['$\Delta T_{i,e}$', '$\Delta T_{x,e}$'])
+        ax.set_ylabel('$\Delta T$, C')
         fname = os.path.join(self.output_folder,
                              'dT_dT_' + self.measurement_point_name + '.png')
         fig.savefig(fname, dpi=100, bbox_inches='tight')
@@ -384,8 +390,8 @@ class Trh():
         ax.plot(dv_i_e, linewidth=0.7)
         ax.plot(dv_x_e, linewidth=0.7)
         ax.grid()
-        ax.legend(['dv_i_e', 'dv_x_e'])
-        ax.set_ylabel('dv, g/m3')
+        ax.legend(['$\Delta v_{i,e}$', '$\Delta v_{x,e}$'])
+        ax.set_ylabel('$\Delta v$, g/m3')
         fname = os.path.join(self.output_folder,
                              'dv_dv_' + self.measurement_point_name + '.png')
         fig.savefig(fname, dpi=100, bbox_inches='tight')
@@ -408,6 +414,24 @@ class Trh():
                              'TI_' + self.measurement_point_name + '.png')
         fig.savefig(fname, dpi=100, bbox_inches='tight')
         plt.close(fig)
+        
+        
+        fig = plt.figure()
+        ax = fig.gca()
+        ax.xaxis.set_major_formatter(self.xaxis_fmt)
+        fig.autofmt_xdate()
+        ax.plot(self.TI, '.', markersize=0.5)
+        ax.plot(self.TI.rolling(14*24*6,
+                                min_periods=6,
+                                center=True).mean())
+        ax.grid()
+        ax.set_ylabel('TI = (Tx-Te)/(Ti-Te), -')
+        ax.set_ylim((ylim_min_TI, ylim_max_TI))
+        fname = os.path.join(self.output_folder,
+                             'TI_with_mean_' + self.measurement_point_name + '.png')
+        fig.savefig(fname, dpi=100, bbox_inches='tight')
+        plt.close(fig)
+        
         
         
         ylim_min_VI = np.percentile( self.VI[~self.VI.isna()] , 5)

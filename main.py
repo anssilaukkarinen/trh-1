@@ -45,12 +45,16 @@ RH_i = data.loc[:, ('sisailma', 'RH')]
 T_e = data.loc[:, ('fmi', 'T')]
 RH_e = data.loc[:, ('fmi', 'RH')]
 
+# measurement_point_name = 'lammoneriste_MWup'
+# measurement_point_name = 'tuuletusvali'
+# measurement_point_name = 'nurkka_alh_vas_MWup'
+measurement_point_name = 'nurkka_oik_ylh_MWup'
 # measurement_point_name = 'nurkka_oik_alh_MWup'
-measurement_point_name = 'lammoneriste_MWup'
 
-measurement_point_MG_classes = {'MG_speed': 'mr',
-                                'MG_max': 'mr',
-                                'C_mat': 0.1}
+
+measurement_point_MG_classes = {'MG_speed': 'vs',
+                                'MG_max': 'vs',
+                                'C_mat': 0.5}
 
 T_x = data.loc[:, (measurement_point_name, 'T')]
 RH_x = data.loc[:, (measurement_point_name, 'RH')]
