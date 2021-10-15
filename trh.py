@@ -337,8 +337,9 @@ class Trh():
         with open(self.fname_logfile, 'a') as f:
             f.write(s + '\n')
             f.write('\n')
-        
-        
+    
+    
+    
     @staticmethod
     def vsat(T):
         # Calculate saturation vapour pressure
@@ -449,5 +450,6 @@ class Trh():
                              'VI_' + self.measurement_point_name + '.png')
         fig.savefig(fname, dpi=100, bbox_inches='tight')
         plt.close(fig)
-        
+    
+    
         
