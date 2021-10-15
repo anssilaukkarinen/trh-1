@@ -12,11 +12,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-import fmgm
+import mi
 
 
 
-class Trh():
+class TRH():
     
     """
     Python class TRH for holding data and calculating indicators
@@ -311,7 +311,7 @@ class Trh():
         
         t_idx = RH_x_M.index
         
-        M_x_dummy = fmgm.MI(T_x_M,
+        M_x_dummy = mi.MI(T_x_M,
                             RH_x_M,
                             self.measurement_point_MG_classes['MG_speed'],
                             self.measurement_point_MG_classes['MG_max'],
