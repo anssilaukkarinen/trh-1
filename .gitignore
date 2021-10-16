@@ -9,7 +9,8 @@
 !LICENSE.txt
 !README.md
 
-!/database_read_only/
+!/database_read_only
+!/database_read_only/*
 !/trh.py
 !/mi.py
 !/example.py
