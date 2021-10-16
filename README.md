@@ -4,10 +4,50 @@
 In English below.
 
 **Suomeksi**
-
 Tämän tietovaraston tarkoituksena on tarjota rakenteista tehtyjen lämpötilan (T) ja suhteellisen kosteuden (RH) mittausten tulosaineistoja vapaasti hyödynnettäväksi. Tietovarasto sisältää myös python-koodin, joka toimii esimerkkinä tulosdatan lukemisesta ja analysoimisesta.
 
-"database_read_only"-kansio sisältää dataa kahdesta lähteestä:
+***Kansiorakenne***
+"database_read_only"-kansiossa oleva data on tarkoitettu vain lukemista varten, eikä kyseiseen kansioon lisätä laskentatuloksia tai tuloskuvaajia. Kansion rakenne on seuraava:
+- Rakennus
+-- Jokaisesta mittausten kohteena olleesta rakennuksesta tehdään kansioon uusi alakansio, johon kyseisen rakennuksen kaikki mittaustulokset tulevat.
+-- Tässä kansiossa on myös kuvailutiedosto, jossa on annettu yksittäisen rakennuksen tasolle liittyviä lähtötietoja, kuten sijaintipaikka halutulla tarkkuudella, maastoluokka, alkuperäinen rakennusvuosi ja rakennuksen pääasiallinen käyttötarkoitus.
+- Rakenne
+-- Jos samasta rakennuksesta on tehty mittauksia useasta eri rakenteesta, niin tällöin kunkin rakenteen mittaustulokset tulevat edelleen omiin alakansioihinsa.
+-- Kunkin rakenteen kansioon tulee myös kuvailutiedosto, jossa annetaan tietoja kyseisestä rakenteesta ja sen mittauksista, kuten mitatun rakenteen ilmansuunta, kuvaus rakenneratkaisusta materiaalikerroksineen ja kerrospaksuuksineen sekä rakenteen alkuperäinen rakennusvuosi ja mahdolliset korjausvuodet. Tässä tiedostossa annetaan myös mittalaitteisiin liittyvät tiedot, kuten mittalaitteen tyyppi sekä lämpötilan ja suhteellisen kosteuden standardiepävarmuudet.
+- Mittauspisteet
+-- Jos samassa rakenteessa on ollut useita mittauspisteitä, niin tällöin jokaiselta yksittäiseltä anturilta saatu T/RH-mittausdata tulee omiin csv-tiedostoihinsa.
+-- Jokaiseen rakennekansioon tulee myös omat tiedostonsa mittausjaksolla vallinneista sisä- ja ulkoilman olosuhteista.
+-- Kunkin mittauspisteen mittaustulokset sisältävien csv-tiedostojen ensimmäisessa sarakkeessa on aikaleima muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa). Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan "T". Mittauspisteen nimi on annettu csv-tiedoston nimenä.
+
+Tässä vielä esimerkki kansiorakenteesta:
+```
+database_read_only
+- single_family_building_1
+-- building.txt
+-- timber_frame_wall_1
+--- structure.txt
+--- indoor_air.csv
+--- outdoor_air.csv OR fmi_1.csv
+--- measurement_point_1.csv
+--- measurement_point_2.csv
+-- timber_frame_wall_2
+--- indoor_air.csv
+--- outdoor_air.csv OR fmi_1.csv
+--- measurement_point_x.csv
+--- measurement_point_y.csv
+-- concrete_wall_1
+--- structure.txt
+--- ...
+- school_1
+-- building.txt
+-- brick_wall_1
+--- ...
+```
+
+"example.py" -tiedosto sisältää esimerkin mittausdatojen käyttämisestä. Esimerkki kutsuu "trh.py"-luokkaa, jossa on toteutettuna peruspaketti yksittäisen mittauspisteen T/RH-olosuhteiden analysoinnista suhteessa sisä- ja ulkoilman olosuhteisiin.
+
+***Käyttöoikeustietoja***
+Tietokanta sisältää dataa kahdesta lähteestä:
 - Rakenteista tehtyjä T/RH-mittauksia sekä näiden metadataa. Tämä data on koottu useiden eri rakennusalan toimijoiden toimesta.
 - Ilmatieteen laitoksen sääasemien havaintodataa.
 
@@ -16,24 +56,21 @@ https://creativecommons.org/licenses/by/4.0/deed.fi
 
 Voit käyttää materiaaleja vapaasti kaupallisiin ja ei-kaupallisiin tarkoituksiin, mutta muista nimetä lähde ("TRH-tietokanta"). Minkäänlaista takuuta datan oikeellisuudesta tai soveltuvuudesta ei anneta. Jos haluat luovuttaa mittausaineistoja tietokannan osaksi (mikä on sangen tervetullutta!), niin tällöin tietokantaan lisättäville aineistoille tulee hyväksyä nämä samat käyttöehdot. Tämä data on "trh"-kansioissa.
 
-Ilmatieteen laitoksen data on sijoitettu "fmi"-kansioihin ja se on vapaasti käytettävissä CC-BY 4.0 -lisenssin mukaisesti:
+Ilmatieteen laitoksen data on saatavilla Ilmatieteen laitoksen Avoin data -palvelusta ja on vapaasti käytettävissä CC-BY 4.0 -lisenssin mukaisesti:
 https://www.ilmatieteenlaitos.fi/avoin-data-lisenssi
+
+Ilmatieteen laitoksen havaintoasemien mittausdata on eriytetty muusta datasta käyttämällä kyseisen datan sisältävän csv-tiedoston nimessä "fmi"-tunnusta. Kyseiset tiedostot voivat sisältää T/RH-tietojen lisäksi myös muita havaintosuureita omissa sarakkeissaan. Jos Ilmatieteen laitoksen avointa dataa on käytetty mainitaan tämä structure.txt -tiedostossa, sisältäen viittauksen Ilmatieteen laitoksen Avoin data -palveluun datan hakuajankohdan ja ilmoituksen, jos dataa on muokattu.
 
 Suureet ja yksiköt
 - Lämpötila ("T"), degC, hetkellinen arvo
 - Suhteellinen kosteus ("RH") nestemäisen veden suhteen , 0-100 %, hetkellinen arvo
-- Diffuusi auringonsäteily vaakapinnalle ("Rdif"), W/m2, edellisen tunnin keskimääräinen vuo
-- Globaali auringonsäteily vaakapinnalle ("Rglob"), W/m2, edellisen tunnin keskimääräinen vuo
-- Sateen kokonaismäärä vaakapinnalle ("precip"), mm/h, edellisen tunnin keskiarvo
-- Tuulen nopeus ("ws"), m/s, hetkellinen arvo
-- Tuulen suunta ("wd"), deg, pohjoisesta myötäpäivään lukien, 90 = idastä, 180 = etelästä.
 
 Lisätietoja (mukaan lukien datojen luovutus tietopankkiin): Anssi Laukkarinen, anssi.laukkarinen@tuni.fi
 
 
 
 
-**In  English**
+**In  English, to be updated**
 
 The primary purpose of this repository is to provide temperature (T) and relative humidity (RH) measurement data from building envelope structures. The repository gives also an example python code that reads in part of the data and makes figures and calculates performance indicators from it. The general goal is to develop the database and the analysis methods forward to create a better understanding on the heat and moisture behaviour of building envelope structures.
 
