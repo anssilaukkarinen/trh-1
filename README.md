@@ -19,7 +19,7 @@ Tämän tietovaraston tarkoituksena on tarjota rakenteista tehtyjen lämpötilan
 - Mittauspisteet
     - Jokaiselta yksittäiseltä anturilta saatu T/RH-mittausdata tulee omiin csv-tiedostoihinsa. Jos/kun rakenteen olosuhteita on mitattu useasta mittauspisteetä, niin tällöin csv-tiedostoja on useita.
     - Jokaiseen rakennekansioon tulee myös omat csv-tiedostonsa mittausjaksolla vallinneista sisä- ja ulkoilman olosuhteista.
-    - Kunkin mittauspisteen mittaustulokset sisältävien csv-tiedostojen ensimmäisessa sarakkeessa on aikaleima muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa).  Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan "T". Mittauspisteen nimi on annettu csv-tiedoston nimenä.
+    - Kunkin mittauspisteen mittaustulokset sisältävien csv-tiedostojen ensimmäisessa sarakkeessa on aikaleima muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa). Aikaleimasarakkeessa ilmoitetun UTC-ajan ja varsinaisten aikaleimojen tulee vastata toisiaan. Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan "T". Mittauspisteen nimi on annettu csv-tiedoston nimenä.
 
 Kansionimissä ja tiedostojen nimissä ei käytetä välilyöntejä, erikoismerkkejä tai ääkkösiä.
 
@@ -61,7 +61,7 @@ Tietokanta sisältää dataa kahdesta lähteestä:
 Rakenteisiin liittyvä mittausdata on vapaasti saatavilla CC-BY 4.0 -lisenssin mukaisesti. Linkki lisenssiin:
 https://creativecommons.org/licenses/by/4.0/deed.fi
 
-Voit käyttää materiaaleja vapaasti kaupallisiin ja ei-kaupallisiin tarkoituksiin, mutta muista nimetä lähde ("TRH-tietokanta"). Minkäänlaista takuuta datan oikeellisuudesta tai soveltuvuudesta ei anneta. Jos haluat luovuttaa mittausaineistoja tietokannan osaksi (mikä on sangen tervetullutta!), niin tällöin tietokantaan lisättäville aineistoille tulee hyväksyä nämä samat käyttöehdot. Tämä data on "trh"-kansioissa.
+Voit käyttää materiaaleja vapaasti kaupallisiin ja ei-kaupallisiin tarkoituksiin, mutta muista nimetä lähde ("TRH-tietokanta"). Minkäänlaista takuuta datan oikeellisuudesta tai soveltuvuudesta ei anneta. Jos haluat luovuttaa mittausaineistoja tietokannan osaksi (mikä on sangen tervetullutta!), niin tällöin tietokantaan lisättäville aineistoille tulee hyväksyä nämä samat käyttöehdot.
 
 Ilmatieteen laitoksen data on saatavilla Ilmatieteen laitoksen Avoin data -palvelusta ja on vapaasti käytettävissä CC-BY 4.0 -lisenssin mukaisesti:
 https://www.ilmatieteenlaitos.fi/avoin-data-lisenssi
