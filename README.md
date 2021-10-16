@@ -11,39 +11,40 @@ Tämän tietovaraston tarkoituksena on tarjota rakenteista tehtyjen lämpötilan
 
 "database_read_only"-kansiossa oleva data on tarkoitettu vain lukemista varten, eikä kyseiseen kansioon lisätä laskentatuloksia tai tuloskuvaajia. Kansion rakenne on seuraava:
 - Rakennus
--- Jokaisesta mittausten kohteena olleesta rakennuksesta tehdään kansioon uusi alakansio, johon kyseisen rakennuksen kaikki mittaustulokset tulevat.
--- Tässä kansiossa on myös kuvailutiedosto, jossa on annettu yksittäisen rakennuksen tasolle liittyviä lähtötietoja, kuten sijaintipaikka halutulla tarkkuudella, maastoluokka, alkuperäinen rakennusvuosi ja rakennuksen pääasiallinen käyttötarkoitus.
+  -- Jokaisesta mittausten kohteena olleesta rakennuksesta tehdään kansioon uusi alakansio, johon kyseisen rakennuksen kaikki mittaustulokset tulevat.
+  -- Tässä kansiossa on myös kuvailutiedosto, jossa on annettu yksittäisen rakennuksen tasolle liittyviä lähtötietoja, kuten sijaintipaikka halutulla tarkkuudella, maastoluokka, alkuperäinen rakennusvuosi ja rakennuksen pääasiallinen käyttötarkoitus.
 - Rakenne
--- Jos samasta rakennuksesta on tehty mittauksia useasta eri rakenteesta, niin tällöin kunkin rakenteen mittaustulokset tulevat edelleen omiin alakansioihinsa.
--- Kunkin rakenteen kansioon tulee myös kuvailutiedosto, jossa annetaan tietoja kyseisestä rakenteesta ja sen mittauksista, kuten mitatun rakenteen ilmansuunta, kuvaus rakenneratkaisusta materiaalikerroksineen ja kerrospaksuuksineen sekä rakenteen alkuperäinen rakennusvuosi ja mahdolliset korjausvuodet. Tässä tiedostossa annetaan myös mittalaitteisiin liittyvät tiedot, kuten mittalaitteen tyyppi sekä lämpötilan ja suhteellisen kosteuden standardiepävarmuudet.
+  -- Jos samasta rakennuksesta on tehty mittauksia useasta eri rakenteesta, niin tällöin kunkin rakenteen mittaustulokset tulevat edelleen omiin alakansioihinsa.
+  -- Kunkin rakenteen kansioon tulee myös kuvailutiedosto, jossa annetaan tietoja kyseisestä rakenteesta ja sen mittauksista, kuten mitatun rakenteen ilmansuunta, kuvaus rakenneratkaisusta materiaalikerroksineen ja kerrospaksuuksineen sekä rakenteen alkuperäinen rakennusvuosi ja mahdolliset korjausvuodet. Tässä tiedostossa annetaan myös mittalaitteisiin liittyvät tiedot, kuten mittalaitteen tyyppi sekä lämpötilan ja suhteellisen kosteuden standardiepävarmuudet.
 - Mittauspisteet
--- Jos samassa rakenteessa on ollut useita mittauspisteitä, niin tällöin jokaiselta yksittäiseltä anturilta saatu T/RH-mittausdata tulee omiin csv-tiedostoihinsa.
--- Jokaiseen rakennekansioon tulee myös omat tiedostonsa mittausjaksolla vallinneista sisä- ja ulkoilman olosuhteista.
--- Kunkin mittauspisteen mittaustulokset sisältävien csv-tiedostojen ensimmäisessa sarakkeessa on aikaleima muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa). Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan "T". Mittauspisteen nimi on annettu csv-tiedoston nimenä.
+  -- Jos samassa rakenteessa on ollut useita mittauspisteitä, niin tällöin jokaiselta yksittäiseltä anturilta saatu T/RH-mittausdata tulee omiin csv-tiedostoihinsa.
+  -- Jokaiseen rakennekansioon tulee myös omat tiedostonsa mittausjaksolla vallinneista sisä- ja ulkoilman olosuhteista.
+  -- Kunkin mittauspisteen mittaustulokset sisältävien csv-tiedostojen ensimmäisessa sarakkeessa on aikaleima muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa). Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan "T". Mittauspisteen nimi on annettu csv-tiedoston nimenä.
 
 Tässä vielä esimerkki kansiorakenteesta:
 ```
 database_read_only
 - single_family_building_1
--- building.txt
--- timber_frame_wall_1
---- structure.txt
---- indoor_air.csv
---- outdoor_air.csv OR fmi_1.csv
---- measurement_point_1.csv
---- measurement_point_2.csv
--- timber_frame_wall_2
---- indoor_air.csv
---- outdoor_air.csv OR fmi_1.csv
---- measurement_point_x.csv
---- measurement_point_y.csv
--- concrete_wall_1
---- structure.txt
---- ...
+  -- building.txt
+  -- timber_frame_wall_1
+     --- structure.txt
+     --- indoor_air.csv
+     --- outdoor_air.csv OR fmi_1.csv
+     --- measurement_point_1.csv
+     --- measurement_point_2.csv
+  -- timber_frame_wall_2
+     --- indoor_air.csv
+     --- outdoor_air.csv OR fmi_1.csv
+     --- measurement_point_x.csv
+     --- measurement_point_y.csv
+  -- concrete_wall_1
+     --- structure.txt
+     --- ...
+     
 - school_1
--- building.txt
--- brick_wall_1
---- ...
+  -- building.txt
+  -- brick_wall_1
+     --- ...
 ```
 
 "example.py" -tiedosto sisältää esimerkin mittausdatojen käyttämisestä. Esimerkki kutsuu "trh.py"-luokkaa, jossa on toteutettuna peruspaketti yksittäisen mittauspisteen T/RH-olosuhteiden analysoinnista suhteessa sisä- ja ulkoilman olosuhteisiin.
