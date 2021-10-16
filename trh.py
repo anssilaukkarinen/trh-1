@@ -2,7 +2,7 @@
 """
 Created on Thu Aug 19 22:28:36 2021
 
-@author: laukkara
+@author: Anssi Laukkarinen 2021
 """
 
 import os
@@ -20,7 +20,7 @@ class TRH():
     
     """
     Python class TRH for holding data and calculating indicators
-    The input data is given as pandas dataframe with datetime index
+    The input data is given as pandas DataFrame or Series with datetime index
     """
     
     def __init__(self,
@@ -47,6 +47,7 @@ class TRH():
         
         self.fname_logfile = os.path.join(self.output_folder,
                                           'log_' + self.measurement_point_name + '.txt')
+        
         with open(self.fname_logfile, mode='w', encoding='utf-8') as f:
             f.write('TRH-1 log file\n')
             time_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -82,7 +83,7 @@ class TRH():
         
         self.xaxis_fmt = mdates.DateFormatter('%Y-%m-%d')
         
-        # Plot, i
+        # Plot, indoor air T and RH
         fig = plt.figure()
         ax = fig.gca()
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
@@ -108,7 +109,7 @@ class TRH():
         plt.close(fig)
         
         
-        # Plot, e
+        # Plot, outdoor air conditions
         fig = plt.figure()
         ax = fig.gca()
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
@@ -135,7 +136,7 @@ class TRH():
         
 
         
-        # Plot, x
+        # Plot, measurement point "x"
         fig = plt.figure()
         ax = fig.gca()
         ax.xaxis.set_major_formatter(self.xaxis_fmt)
