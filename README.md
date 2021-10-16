@@ -4,9 +4,11 @@
 In English below.
 
 **Suomeksi**
+
 Tämän tietovaraston tarkoituksena on tarjota rakenteista tehtyjen lämpötilan (T) ja suhteellisen kosteuden (RH) mittausten tulosaineistoja vapaasti hyödynnettäväksi. Tietovarasto sisältää myös python-koodin, joka toimii esimerkkinä tulosdatan lukemisesta ja analysoimisesta.
 
 ***Kansiorakenne***
+
 "database_read_only"-kansiossa oleva data on tarkoitettu vain lukemista varten, eikä kyseiseen kansioon lisätä laskentatuloksia tai tuloskuvaajia. Kansion rakenne on seuraava:
 - Rakennus
 -- Jokaisesta mittausten kohteena olleesta rakennuksesta tehdään kansioon uusi alakansio, johon kyseisen rakennuksen kaikki mittaustulokset tulevat.
@@ -47,6 +49,7 @@ database_read_only
 "example.py" -tiedosto sisältää esimerkin mittausdatojen käyttämisestä. Esimerkki kutsuu "trh.py"-luokkaa, jossa on toteutettuna peruspaketti yksittäisen mittauspisteen T/RH-olosuhteiden analysoinnista suhteessa sisä- ja ulkoilman olosuhteisiin.
 
 ***Käyttöoikeustietoja***
+
 Tietokanta sisältää dataa kahdesta lähteestä:
 - Rakenteista tehtyjä T/RH-mittauksia sekä näiden metadataa. Tämä data on koottu useiden eri rakennusalan toimijoiden toimesta.
 - Ilmatieteen laitoksen sääasemien havaintodataa.
