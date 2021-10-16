@@ -15,11 +15,24 @@ Tämän tietovaraston tarkoituksena on tarjota rakenteista tehtyjen lämpötilan
     - Tässä kansiossa on myös kuvailutiedosto, jossa on annettu yksittäisen rakennuksen tasolle liittyviä lähtötietoja, kuten sijaintipaikka halutulla tarkkuudella, maastoluokka, alkuperäinen rakennusvuosi ja rakennuksen pääasiallinen käyttötarkoitus.
 - Rakenne
     - Kustakin rakenteesta tehdyt mittaukset tulevat omiin alakansioihinsa. Jos mittauksia on tehty useasta rakenteesta, niin tällöin kunkin rakenteen mittaustulokset tulevat omiin kansioihinsa.
-    - Kunkin rakenteen kansioon tulee myös kuvailutiedosto, jossa annetaan tietoja kyseisestä rakenteesta ja sen mittauksista, kuten rakenteeseen rajautuvan huonetilojen käyttötarkoitus ja sanallinen kuvaus tyypillisistä olosuhteista, kerrosnumero maanpinnan tasoon nähden, mitatun rakenteen ilmansuunta, kuvaus rakenneratkaisusta materiaalikerroksineen ja kerrospaksuuksineen sekä rakenteen alkuperäinen rakennusvuosi ja mahdolliset korjausvuodet. Tässä tiedostossa annetaan myös mittalaitteisiin liittyvät tiedot, kuten mittalaitteen tyyppi sekä lämpötilan ja suhteellisen kosteuden standardiepävarmuudet.
+    - Kunkin rakenteen kansioon tulee myös kuvailutiedosto, jossa annetaan tietoja kyseisestä rakenteesta ja sen mittauksista, kuten:
+        - rakenteeseen rajautuvan huonetilojen käyttötarkoitus ja sanallinen kuvaus tyypillisistä olosuhteista
+        - kerrosnumero maanpinnan tasoon nähden
+        - mitatun rakenteen ilmansuunta
+        - kuvaus rakenneratkaisusta materiaalikerroksineen ja kerrospaksuuksineen
+        - rakenteen alkuperäinen rakennusvuosi ja mahdolliset korjausvuodet
+        - mittalaitteisiin liittyvät tiedot, kuten mittalaitteen tyyppi sekä lämpötilan ja suhteellisen kosteuden standardiepävarmuudet.
 - Mittauspisteet
     - Jokaiselta yksittäiseltä anturilta saatu T/RH-mittausdata tulee omiin csv-tiedostoihinsa. Jos/kun rakenteen olosuhteita on mitattu useasta mittauspisteetä, niin tällöin csv-tiedostoja on useita.
     - Jokaiseen rakennekansioon tulee myös omat csv-tiedostonsa mittausjaksolla vallinneista sisä- ja ulkoilman olosuhteista.
-    - Kunkin mittauspisteen mittaustulokset sisältävien csv-tiedostojen ensimmäisessa sarakkeessa on aikaleima muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa). Aikaleimasarakkeessa ilmoitetun UTC-ajan ja varsinaisten aikaleimojen tulee vastata toisiaan. Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan "T". Mittauspisteen nimi on annettu csv-tiedoston nimenä.
+    - csv-tiedostojen rakenne:
+        - Ensimmäinen sarake sisältää hetkellisten T/RH-mittausarvojen aikaleiman muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa). Aikaleimasarakkeessa ilmoitetun UTC-ajan ja varsinaisten aikaleimojen tulee vastata toisiaan, eli kesäajan aikaleimat korjataan talviaikaan.
+        - Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan sarakeotsikkona "T".
+        - Mittauspisteen nimi on annettu csv-tiedoston nimenä.
+    - Mittauspisteiden kuvailutiedoissa voidaan hyödyntää mahdollisuuksien mukaan seuraavia termejä:
+        - "Rajapinta" tarkoittaa kahden materiaalipinnan tasomaista kosketuspintaa.
+        - "Kulma" tarkoittaa kahden materiaalin viivamaista kohtaamispaikkaa, jossa tasomaiset materiaalikerrokset ovat toisiinsa nähden 90 asteen kulmassa.
+        - "Nurkka" tarkoittaa kolmen materiaalin pistemäistä kohtaamispaikkaa.
 
 Kansionimissä ja tiedostojen nimissä ei käytetä välilyöntejä, erikoismerkkejä tai ääkkösiä.
 
@@ -59,11 +72,13 @@ Tietokanta sisältää dataa kahdesta lähteestä:
 - Ilmatieteen laitoksen sääasemien havaintodataa.
 
 Rakenteisiin liittyvä mittausdata on vapaasti saatavilla CC-BY 4.0 -lisenssin mukaisesti. Linkki lisenssiin:
+
 https://creativecommons.org/licenses/by/4.0/deed.fi
 
 Voit käyttää materiaaleja vapaasti kaupallisiin ja ei-kaupallisiin tarkoituksiin, mutta muista nimetä lähde ("TRH-tietokanta"). Minkäänlaista takuuta datan oikeellisuudesta tai soveltuvuudesta ei anneta. Jos haluat luovuttaa mittausaineistoja tietokannan osaksi (mikä on sangen tervetullutta!), niin tällöin tietokantaan lisättäville aineistoille tulee hyväksyä nämä samat käyttöehdot.
 
 Ilmatieteen laitoksen data on saatavilla Ilmatieteen laitoksen Avoin data -palvelusta ja on vapaasti käytettävissä CC-BY 4.0 -lisenssin mukaisesti:
+
 https://www.ilmatieteenlaitos.fi/avoin-data-lisenssi
 
 Ilmatieteen laitoksen havaintoasemien mittausdata on eriytetty muusta datasta käyttämällä kyseisen datan sisältävän csv-tiedoston nimessä "fmi"-tunnusta. Kyseiset tiedostot voivat sisältää T/RH-tietojen lisäksi myös muita havaintosuureita omissa sarakkeissaan. Jos Ilmatieteen laitoksen avointa dataa on käytetty mainitaan tämä structure.txt -tiedostossa, sisältäen viittauksen Ilmatieteen laitoksen Avoin data -palveluun datan hakuajankohdan ja ilmoituksen, jos dataa on muokattu.
