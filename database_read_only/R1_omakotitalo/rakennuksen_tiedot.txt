@@ -1,0 +1,7 @@
+
+# Rakennus
+Sijaintipaikkakunta: Tampere
+Maastoluokka: III
+Käyttötarkoitus: Asuinrakennus
+Kerrosten lukumäärä: 1
+
