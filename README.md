@@ -14,36 +14,39 @@ Tämän tietovaraston tarkoituksena on tarjota rakenteista tehtyjen lämpötilan
     - Jokaisesta mittausten kohteena olleesta rakennuksesta tehdään kansioon uusi alakansio, johon kyseisen rakennuksen kaikki mittaustulokset tulevat.
     - Tässä kansiossa on myös kuvailutiedosto, jossa on annettu yksittäisen rakennuksen tasolle liittyviä lähtötietoja, kuten sijaintipaikka halutulla tarkkuudella, maastoluokka, alkuperäinen rakennusvuosi ja rakennuksen pääasiallinen käyttötarkoitus.
 - Rakenne
-    - Jos samasta rakennuksesta on tehty mittauksia useasta eri rakenteesta, niin tällöin kunkin rakenteen mittaustulokset tulevat edelleen omiin alakansioihinsa.
+    - Kustakin rakenteesta tehdyt mittaukset tulevat omiin alakansioihinsa. Jos mittauksia on tehty useasta rakenteesta, niin tällöin kunkin rakenteen mittaustulokset tulevat omiin kansioihinsa.
     - Kunkin rakenteen kansioon tulee myös kuvailutiedosto, jossa annetaan tietoja kyseisestä rakenteesta ja sen mittauksista, kuten mitatun rakenteen ilmansuunta, kuvaus rakenneratkaisusta materiaalikerroksineen ja kerrospaksuuksineen sekä rakenteen alkuperäinen rakennusvuosi ja mahdolliset korjausvuodet. Tässä tiedostossa annetaan myös mittalaitteisiin liittyvät tiedot, kuten mittalaitteen tyyppi sekä lämpötilan ja suhteellisen kosteuden standardiepävarmuudet.
 - Mittauspisteet
-    - Jos samassa rakenteessa on ollut useita mittauspisteitä, niin tällöin jokaiselta yksittäiseltä anturilta saatu T/RH-mittausdata tulee omiin csv-tiedostoihinsa.
-    - Jokaiseen rakennekansioon tulee myös omat tiedostonsa mittausjaksolla vallinneista sisä- ja ulkoilman olosuhteista.
-    - Kunkin mittauspisteen mittaustulokset sisältävien csv-tiedostojen ensimmäisessa sarakkeessa on aikaleima muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa). Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan "T". Mittauspisteen nimi on annettu csv-tiedoston nimenä.
+    - Jokaiselta yksittäiseltä anturilta saatu T/RH-mittausdata tulee omiin csv-tiedostoihinsa. Jos/kun rakenteen olosuhteita on mitattu useasta mittauspisteetä, niin tällöin csv-tiedostoja on useita.
+    - Jokaiseen rakennekansioon tulee myös omat csv-tiedostonsa mittausjaksolla vallinneista sisä- ja ulkoilman olosuhteista.
+    - Kunkin mittauspisteen mittaustulokset sisältävien csv-tiedostojen ensimmäisessa sarakkeessa on aikaleima muodossa: "yyyy-mm-pp HH:MM:SS". Aikaleimasarakkeen otsikko on "t_UTC+2", jossa "+2" tarkoittaa Suomen normaaliaikaa (talviaikaa).  Suhteellisen kosteuden sarakeotsikkona on "RH" ja lämpötilan "T". Mittauspisteen nimi on annettu csv-tiedoston nimenä.
+
+Kansionimissä ja tiedostojen nimissä ei käytetä välilyöntejä, erikoismerkkejä tai ääkkösiä.
 
 Tässä vielä esimerkki kansiorakenteesta:
 ```
 database_read_only
-- single_family_building_1
-  -- building.txt
-  -- timber_frame_wall_1
-     --- structure.txt
-     --- indoor_air.csv
-     --- outdoor_air.csv OR fmi_1.csv
-     --- measurement_point_1.csv
-     --- measurement_point_2.csv
-  -- timber_frame_wall_2
-     --- indoor_air.csv
-     --- outdoor_air.csv OR fmi_1.csv
-     --- measurement_point_x.csv
-     --- measurement_point_y.csv
-  -- concrete_wall_1
-     --- structure.txt
+- omakotitalo_1
+  -- rakennuksen_tiedot.txt
+  -- puurankaseina_1
+     --- rakenteen_ja_mittauspisteiden_tiedot.txt
+     --- sisailman_olosuhteet.csv
+     --- ulkoilman_olosuhteet.csv OR fmi_1.csv
+     --- runkotolpan_ja_tuulensuojalevyn_nurkka.csv
+     --- tuulensuojan_sisapinta.csv
+     --- alaohjauspuun_ylapinta.csv
+  -- puurankaseina_2
+     --- sisailma.csv
+     --- ulkoilma.csv OR fmi_1.csv
+     --- runkotolpan_ja_tuulensuojalevyn_nurkka.csv
+     --- ylatukipuun_alapinta.csv
+  -- betonisandwich_US_1
+     --- rakenteen_ja_mittauspisteiden_tiedot.txt
      --- ...
      
-- school_1
-  -- building.txt
-  -- brick_wall_1
+- koulurakennus_1
+  -- rakennuksen_tiedot.txt
+  -- tiiliseina_1.csv
      --- ...
 ```
 
