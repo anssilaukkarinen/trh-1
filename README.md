@@ -96,7 +96,7 @@ Lisätietoja (mukaan lukien datojen luovutus tietopankkiin): Anssi Laukkarinen, 
 
 
 
-**In  English, to be updated**
+**In  English**
 
 The purpose of this repository is to provide open data access to temperature (T) and relative humidity (RH) measurement data from building envelope structures. The repository contains an example code on the different possibilities on how the T/RH conditions in a single measurement point could be analysed.
 
