@@ -1,0 +1,93 @@
+Tiedot paivitetty: 2021-11-22
+
+# Kerrokset sisältä ulos
+
+sisäverhous
+höyrynsulku
+puhalluseriste, puukuitueriste 0,5 m
+puiset kattoristikot ja ilmatila, ilmatilan keskimääräinen korkeus noin 1,5 m
+aluskate
+tuuletusväli
+vesikate, profiilipelti
+
+
+# Rakenteen ulkopuoli
+
+Ilmansuunta = -1
+Maastoluokka = III
+C_R = maastoluokan mukaan
+C_T = 1
+C_T_kuvaus = melko tasaista maastoa
+O = 0.3
+O_kuvaus = eteläpuolella metsikköä, pohjoispuolella avointa
+W = 1.0
+W_kuvaus = yläpohja
+
+
+
+# Rakenteen sisäpuolen olosuhteet
+
+Huonetilan käyttötarkoitus: tavanomaiset asuinhuoneet
+Olosuhteet: tavanomaiset
+Kerrosnumero: yläpohja yksikerroksisen rakennuksen yläpuolella
+
+
+
+# Mittauspisteet
+
+fmi.csv:
+- Ilmatieteen laitoksen lähin havaintoasema
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri (työhuone)
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri (tyhuone)
+
+outdoor.csv
+- yläpohjasta pohjois-länsi -suunnalla olevan räystään harvalaudoituksen päälle työnnetty anturi
+
+
+
+
+roofmiddle_airmiddle.csv
+- yläpohjan keskialue, ilmatilan keskikorkeus
+
+roofmiddle_insulationtop.csv
+- yläpohjan keskialue, puhalluslämmöneristeen yläpinta
+
+roofnorthwest_airtop.csv
+- rakennuksen pohjois-länsi -nurkassa, päädyn ja pitkän sivun kulmauksessa, niin korkealla, kuin mitä käsin ylsi (~2 m)
+
+
+
+
+roofnorthwest_eavesbottom.csv
+- rakennuksen pitkällä sivulla, pohjois-länsi -puolella, lähellä seinälinjaa, lämmöneristeen yläpinnassa
+
+roofnorthwest_eavestop.csv
+- rakennuksen pitkällä sivulla, pohjois-länsi -puolella, yläpohjan tuuletusraon edessä
+
+
+
+roofsoutheast_eavesbottom.csv
+- lähellä seinälinjaa, lämmöneristeen yläpinnassa
+
+roofsoutheast_eavestop.csv
+- yläpohjan tuuletusraon edessä
+
+roofsoutheast_topofunderlay.csv
+- aluskatteen päällä
+
+
+
+
+
+
+# Mittalaite
+
+Sisäolosuhteet: Comark N2013
+Rakenteet mittaukset: Rotronic HL-NT2 -dataloggeri ja HC2-mittapää
+
+
+

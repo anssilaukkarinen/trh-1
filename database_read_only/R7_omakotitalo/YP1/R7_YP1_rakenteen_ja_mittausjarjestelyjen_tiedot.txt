@@ -1,0 +1,94 @@
+Tiedot paivitetty: 2021-11-22
+
+# Kerrokset sisältä ulos
+
+sisäverhous
+höyrynsulku
+puhalluseriste, mineraalivilla 0,3 m
+puiset kattoristikot ja ilmatila, ilmatilan keskimääräinen korkeus noin 1 m
+aluskate
+tuuletusväli
+tiilikate
+
+
+# Rakenteen ulkopuoli
+
+Ilmansuunta = -1
+Maastoluokka = III
+C_R = maastoluokan mukaan
+C_T = 1
+C_T_kuvaus = tasaista maastoa
+O = 0.8
+O_kuvaus = samankorkuisia lähiöpientaloja joka suunnassa
+W = 1.0
+W_kuvaus = yläpohja
+
+
+
+# Rakenteen sisäpuolen olosuhteet
+
+Huonetilan käyttötarkoitus: tavanomaiset asuinhuoneet
+Olosuhteet: tavanomaiset asuintilat
+Kerrosnumero: yläpohja yksikerroksisen paritalon eteläpäädyssä, asuintilojen yläpuolella
+
+
+
+# Mittauspisteet
+
+fmi.csv:
+- Ilmatieteen laitoksen lähin havaintoasema
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri
+
+roofeast_outside.csv
+- ulkoseinälinjan ulkopuolella, räystään harvalaudoituksen päällä, itäpuoleisella pitkällä sivulla
+
+
+
+
+roofeast_airtop.csv
+- räystään lähellä yläpohjan tuuletusraon kohdalla
+
+roofeast_insulationtop.csv
+- räystään lähellä, yläpohjan lämmöneristeen yläpinnassa
+
+
+
+
+roofmiddle_airmiddle.csv
+- yläpohjan keskialue, ilmatilan keskikorkeus
+
+roofmiddle_airtop.csv
+- yläpohjan keskialue, ilmatilan yläosa
+
+roofmiddle_insulationtop.csv
+- yläpohjan keskialue, puhalluslämmöneristeen yläpinta
+
+roofmiddle_topofunderlay.csv
+- yläpohjan keskialue, aluskatteen ja tiilikatteen välissä tuuletusvälissä
+
+
+
+
+roofwest_airtop.csv
+- rakennuksen pitkällä sivulla, yläpohjan tuuletusraon tasolla pystysuunnassa, hieman aluskatteen alapuolella
+
+roofwest_insulationtop.csv
+- lähellä ulkoseinälinjaa, lämmöneristeen yläpinta
+
+
+
+
+
+
+# Mittalaite
+
+Sisäolosuhteet: Comark N2013
+Rakenteet mittaukset: Rotronic HL-NT2 -dataloggeri ja HC2-mittapää
+
+
+

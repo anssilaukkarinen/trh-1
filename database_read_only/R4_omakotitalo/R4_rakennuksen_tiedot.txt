@@ -1,0 +1,10 @@
+Tiedot päivitetty: 2021-11-22
+
+# Rakennus
+Sijainti: Tampere
+Rakennusvuosi: 1988
+Peruskorjausvuosi: -1
+Käyttötarkoitus: asuinrakennus
+Kerrosten lukumäärä: 2
+Muita tietoja: FRAME Tampere1
+Rakennuksen kokonaiskorkeus maanpinnasta: 4.5 - 8.0

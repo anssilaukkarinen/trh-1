@@ -1,0 +1,11 @@
+Tiedot päivitetty: 2021-11-22
+
+# Rakennus
+Sijainti: Vantaa
+Rakennusvuosi: 2001
+Peruskorjausvuosi: -1
+Käyttötarkoitus: asuinrakennus, paritalon eteläpääty
+Kerrosten lukumäärä: 1
+Muita tietoja: FRAME Vantaa
+Rakennuksen kokonaiskorkeus maanpinnasta: 4.5 m
+

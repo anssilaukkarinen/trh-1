@@ -1,0 +1,91 @@
+Tiedot paivitetty: 2021-11-22
+
+# Kerrokset sisältä ulos
+
+sisäverhous
+höyrynsulkumuovi
+puhalluseriste, mineraalivilla 0,25 m
+tumma pahvi/bitumipaperi, osittain repeytyneet pois mineraalivillaeristeen päältä
+puiset kattoristikot ja ilmatila, ilmatilan keskimääräinen korkeus noin 1 m
+aluskate
+tuuletusväli
+vesikate, tiili
+
+
+# Rakenteen ulkopuoli
+
+Ilmansuunta = -1
+Maastoluokka = III
+C_R = maastoluokan mukaan
+C_T = 1
+C_T_kuvaus = melko tasaista maastoa
+O = 1
+O_kuvaus = yläpohja
+W = 1.0
+W_kuvaus = yläpohja
+
+
+
+# Rakenteen sisäpuolen olosuhteet
+
+Huonetilan käyttötarkoitus: tavanomaiset asuinhuoneet
+Olosuhteet: tavanomaiset
+Kerrosnumero: yläpohja yksikerroksisen rakennuksen yläpuolella
+
+
+
+# Mittauspisteet
+
+fmi.csv:
+- Ilmatieteen laitoksen lähin havaintoasema
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri
+
+
+
+roofmiddle_airmiddle.csv
+- yläpohjan keskialue, ilmatilan keskikorkeus
+
+roofmiddle_airtop.csv
+- yläpohjan keskialue, harjapiikin luona
+
+roofmiddle_bottomofcardboard.csv
+- yläpohjan keskialue, yläpohjan lämmöneristeen ja sen yläpuolella olevan rakennuspaperin välissä
+
+roofmiddle_topofcardboard.csv
+- yläpohjan keskialue, lämmöneristeen pinnalla olevan rakennuspaperin yläpinnassa
+
+
+
+roofnorth_eavesbottom.csv
+- yläpohjassa rakennuksen pitkällä sivulla (pohjoispuoli), lämmöneristeen yläpinta lähellä ulkoseinälinjaa
+
+roofnorth_eavestop.csv
+- yläpohjassa rakennuksen pitkällä sivulla (pohjoispuoli), yläpohjan tuuletusraon edessä
+
+
+
+roofsouth_eavesbottom.csv
+- anturi yläpohjassa rakennuksen pitkällä sivulla (eteläpuolella), yläpohjan lämmöneristeen/rakennuspaperin yläpinnalla
+
+roofsouth_eavestop.csv
+- anturi yläpohjassa rakennuksen pitkällä sivulla (eteläpuolella), yläpohjan tuuletusraon edessä, aluskatteen alapinnasta hieman irti
+
+roofsouth_topofunderlay.csv
+- anturi aluskatteen ja tiilikatteen välissä tuuletusraossa
+
+
+
+
+
+# Mittalaite
+
+Sisäolosuhteet: Comark N2013
+Rakenteet mittaukset: Rotronic HL-NT2 -dataloggeri ja HC2-mittapää
+
+
+

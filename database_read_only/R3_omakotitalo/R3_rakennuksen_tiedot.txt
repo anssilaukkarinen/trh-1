@@ -1,0 +1,10 @@
+Tiedot päivitetty: 2021-11-22
+
+# Rakennus
+Sijainti: Espoo
+Rakennusvuosi: 2010
+Peruskorjausvuosi: -3
+Käyttötarkoitus: asuinrakennus
+Kerrosten lukumäärä: 2
+Muita tietoja: FRAME Espoo2
+Rakennuksen kokonaiskorkeus maanpinnasta: 8

@@ -1,0 +1,64 @@
+Tiedot paivitetty: vvvv-kk-pp
+
+# Kerrokset sisältä ulos
+
+<kerroksen 1 kuvaus>
+<kerroksen n kuvaus>
+
+
+# (Lähes) suorakaiteen muotoisen yläpohjan tai alapohjan mitat
+yläpohjan leveys (harjalinjaan nähden kohtisuorassa suunnassa, ulkoseinän ulkolinja) = 
+yläpohjan pituus (harjalinjan suunnassa, ulkoseinän ulkolinja) = 
+yläpohjan tuuletusraon korkeus = 
+harjakattoyläpohjan ilmatilan korkeus räystäällä = 
+harjakattoyläpohjan ilmatilan maksimikorkeus = 
+yläpohjan ilmatilan keskimääräinen korkeus = 
+
+# L-kirjaimen muotoisen ylä- tai alapohjan mitat
+<mitat tähän>
+
+
+
+
+
+# Rakenteen ulkopuoli
+
+Ilmansuunta = <astetta myötäpäivään pohjoisesta, YP tai AP = -1>
+Maastoluokka = I/II/III/IV
+C_R = maastoluokan mukaan
+C_T = <-1, jos ei tiedossa>
+C_T_kuvaus = 
+O = <yläpohjalle 1.0>
+O_kuvaus = 
+W = <yläpohjalle 1.0>
+W_kuvaus = <sanallinen kuvaus ulkopuolisista räystäistä ynnä muista>
+
+
+
+# Rakenteen sisäpuolen olosuhteet
+
+Huonetilan käyttötarkoitus: <sanallinen kuvaus>
+Olosuhteet: <sanallinen kuvaus>
+Kerrosnumero: <kuinka mones kerros rakennuksessa?>
+
+
+
+# Mittauspisteet
+
+fmi.csv:
+- Ilmatieteen laitoksen lähin havaintoasema
+
+sisailma.csv
+- <sanallinen kuvaus sisäolosuhteiden mittauspisteen sijainnista>
+
+<rajapinta_ TAI kulma_ TAI nurkka_><mittauspisteen_nimi>
+- <sanallinen kuvaus mittauspisteen sijainnista rakenteessa>
+
+
+
+# Mittalaite
+
+<mittalaitteen tai -laitteiston sanallinen kuvaus>
+
+
+

@@ -1,0 +1,11 @@
+Tiedot päivitetty: 2021-11-22
+
+# Rakennus
+Sijainti: Valkeakoski
+Rakennusvuosi: 2009
+Peruskorjausvuosi: -1
+Käyttötarkoitus: asuinrakennus
+Kerrosten lukumäärä: 1
+Muita tietoja: FRAME Valkeakoski
+Rakennuksen kokonaiskorkeus maanpinnasta: 5.5 m
+

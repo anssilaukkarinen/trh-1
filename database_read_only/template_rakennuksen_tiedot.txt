@@ -1,0 +1,10 @@
+Tiedot päivitetty: vvvv-kk-pp
+
+# Rakennus
+Sijainti: <>
+Rakennusvuosi: <vvvv TAI -1, jos ei ole tiedossa> 
+Peruskorjausvuosi: <vvvv, vvvv, ... TAI -1, ei mitään tietoa asiasta TAI -2, jos tehty, mutta vuosi ei tiedossa TAI -3, jos ei ole tehty> 
+Käyttötarkoitus: <asuinrakennus, ...>
+Kerrosten lukumäärä: <lukumäärä tähän>
+Muita tietoja: <mahdollinen projektitunnista tms jäljitettävyyttä varten>
+Rakennuksen kokonaiskorkeus maanpinnasta: <korkeus metreinä tähän>

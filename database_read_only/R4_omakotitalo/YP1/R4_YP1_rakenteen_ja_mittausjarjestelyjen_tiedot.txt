@@ -1,0 +1,91 @@
+Tiedot paivitetty: 2021-11-22
+
+# Kerrokset sisältä ulos
+
+sisäverhous
+höyrynsulkumuovi
+puhalluseriste, mineraalivilla 0,20 m
+puiset kattoristikot ja heikosti tuulettuva ilmatila, keskimääräinen korkeus noin 0.7 m
+aluskate, jonkinlainen kangas tai muu hieman kevyttä kalvoa tukevampi
+tuuletusväli
+vesikate, tiili
+
+
+# Rakenteen ulkopuoli
+
+Ilmansuunta = -1
+Maastoluokka = III
+C_R = maastoluokan mukaan
+C_T = 1
+C_T_kuvaus = melko tasaista maastoa
+O = 1
+O_kuvaus = yläpohja
+W = 1.0
+W_kuvaus = yläpohja
+
+
+
+# Rakenteen sisäpuolen olosuhteet
+
+Huonetilan käyttötarkoitus: tavanomaiset asuinhuoneet
+Olosuhteet: tavanomaiset
+Kerrosnumero: yläpohja kaksikerroksisen rinteessä sijaitsevan rakennuksen yläpuolella
+
+
+
+# Mittauspisteet
+
+fmi.csv:
+- Ilmatieteen laitoksen lähin havaintoasema
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri
+
+
+
+
+roofmiddle_airmiddle.csv
+- yläpohjan keskialue, ilmatilan keskikorkeus
+
+roofmiddle_airtop.csv
+- yläpohjan keskialue, yläpohjan yläosa
+
+roofmiddle_insulationtop.csv
+- yläpohjan keskialue, lämmöneristeen yläpinta
+
+roofmiddle_underlaytop.csv
+- yläpohjan keskialue, aluskatteen ja tiilikatteen välissä tuuletusvälissä (jommalla kummalla puolella harjaa)
+
+
+
+
+roofnorth_airtop.csv
+- yläpohjan pohjoisen puoleinen pitkä sivu, anturi yläpohjan tuuletusraon edessä hieman aluskatteesta irti
+
+roofnorth_insulationtop.csv
+- yläpohjan pohjoisen puoleinen pitkä sivu, anturi lähellä ulkoseinälinjaa yläpohjan lämmöneristeen yläpinnassa
+
+
+
+roofsouth_airtop.csv
+- anturi yläpohjan eteläisellä pitkällä sivulla, yläpohjan tuuletusaukkojen edessä hieman aluskatteesta irti
+
+roofsouth_insulationtop.csv
+- anturi yläpohjan eteläisellä pitkällä sivulla, lähellä ulkoseinälinjaa, yläpohjan lämmöneristeen yläpinnalla
+
+roofsouth_outside.csv
+- anturi työnnettynä eteisen katoksen harvalaudoituksen läpi mittaamaan katoksen ulkokuivia olosuhteita
+
+
+
+
+# Mittalaite
+
+Sisäolosuhteet: Comark N2013
+Rakenteet mittaukset: Rotronic HL-NT2 -dataloggeri ja HC2-mittapää
+
+
+

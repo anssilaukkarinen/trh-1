@@ -1,0 +1,74 @@
+Tiedot paivitetty: 2021-11-22
+
+# Kerrokset sisältä ulos
+
+sisäverhous
+höyrynsulkumuovi
+puhalluseriste, puhalluseriste lasivilla 0,5 m
+yläpohjan ilmatila, keskimääräinen korkeus 0,5 m (pulpettikatto)
+ponttilaudoitus
+kermikate
+
+
+# Rakenteen ulkopuoli
+
+Ilmansuunta = -1
+Maastoluokka = III
+C_R = maastoluokan mukaan
+C_T = -1
+C_T_kuvaus = rakennus sijaitsee mäen päällä
+O = 1.0
+O_kuvaus = yläpohja
+W = 1.0
+W_kuvaus = 
+
+
+
+# Rakenteen sisäpuolen olosuhteet
+
+Huonetilan käyttötarkoitus: kaksikerroksisen pientalon yläkerta
+Olosuhteet: tavanomaiset huonetilojen olosuhteet
+Kerrosnumero: 2
+
+
+
+# Mittauspisteet
+
+fmi.csv:
+- Ilmatieteen laitoksen lähin havaintoasema
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri
+
+indoor1.csv
+- sisäilman olosuhteita mittaava loggeri
+
+
+roofsouth_infrontofeave.csv
+- yläpohjan eteläpuolella (pulpettikaton korkeampi puoli), yläpohjan ilma-aukkojen edessä yläpohjan sisäpuolella
+
+roofsouth_insulationtop.csv
+- yläpohjan eteläpuoli, noin 10 cm tuulensuojalevystä, yläpohjan puhalluseristeen yläpinta
+
+roofsouth_outside.csv
+- yläpohjan eteläpuoli, anturi työnnettynä noin 10-20 cm yläpohjan tuuletusvälistä seinälinjan ulkopuolelle (huom. aurinko lämmittänyt anturia)
+
+roofmiddle_airmiddle.csv
+- yläpohjan keskialue, ilmatilan keskikorkeus
+
+roofmiddle_airtop.csv
+- yläpohjan keskialue, vesikatteen alla olevan ponttilaudoituksen alapinnassa
+
+roofmiddle_insulationtop.csv
+- yläpohjan keskialue, puhalluseristeen yläpinta
+
+
+
+
+# Mittalaite
+
+Sisäolosuhteet: Comark N2013
+Rakenteet mittaukset: Rotronic HL-NT2 -dataloggeri ja HC2-mittapää
+
+
+

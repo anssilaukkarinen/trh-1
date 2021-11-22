@@ -1,0 +1,10 @@
+Tiedot päivitetty: 2021-11-22
+
+# Rakennus
+Sijainti: Tampere
+Rakennusvuosi: -1
+Peruskorjausvuosi: -1
+Käyttötarkoitus: asuinrakennus
+Kerrosten lukumäärä: 1
+Muita tietoja: Laukkarinen et al. (2021) - Rakennusfysiikka 2021 TRH -artikkeli
+Rakennuksen kokonaiskorkeus maanpinnasta: 5

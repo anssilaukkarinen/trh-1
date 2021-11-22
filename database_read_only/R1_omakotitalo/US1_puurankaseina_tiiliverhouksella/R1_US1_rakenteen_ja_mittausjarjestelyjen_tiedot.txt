@@ -1,31 +1,34 @@
+Tiedot paivitetty: vvvv-kk-pp
 
+# Kerrokset sisältä ulos
 
-# Rakennetta ympäröivät olosuhteet
-
-Huonetilan käyttötarkoitus: Remontoitavana asuinkäyttöä varten
-Olosuhteet: Puolilämmin tila, ei aktiivikäytössä mittausten aikana
-Ulkopuoliset varjostukset: Räystäs 0.5 m seinälinjalta ulospäin
-Ulkopuoliset suojaukset:
-C_R = maastoluokan mukaan
-C_T = 1.0, ympäröivä maasto tasainen
-O = 0.3, puustoa noin 20-30 metrin päässä
-W = 0.3, yksikerroksinen rakennus räystäillä
-
-Mitattava seinä sijaitsee rakennuksen pohjoispuolella.
-
-
-
-
-# Rakenne
-
-Kerrokset sisältä ulos:
 - kipsilevy, maalattu
 - höyrynsulkumuovi
 - puiset runkotolpat ja lasivillalevy, 100 mm
 - paksu mineraalivillatuulensuojalevy, 50 mm
-- tuuletusväli, noin 5-20 mm
+- tuuletusväli, 5-20 mm
 - tiiliverhous, 75-85 mm
 
+
+# Rakenteen ulkopuoli
+
+Ilmansuunta (astetta myötäpäivään pohjoisesta) = 0
+Maastoluokka = III
+C_R = maastoluokan mukaan
+C_T = 1.0
+C_T_kuvaus = ympäröivä maasto tasainen
+O = 0.3
+O_kuvaus = puustoa noin 20-30 metrin päässä
+W = 0.3
+W_kuvaus = Räystäs 0.5 m seinälinjalta ulospäin
+
+
+
+# Rakenteen sisäpuolen olosuhteet
+
+Huonetilan käyttötarkoitus: Remontoitavana asuinkäyttöä varten
+Olosuhteet: Puolilämmin tila, ei aktiivikäytössä mittausten aikana
+Kerrosnumero: yksikerroksinen rakennus
 
 
 
@@ -33,6 +36,9 @@ Kerrokset sisältä ulos:
 
 fmi.csv:
 - Ilmatieteen laitoksen lähin havaintoasema
+
+sisailma.csv
+- <sanallinen kuvaus sisäolosuhteiden mittauspisteen sijainnista>
 
 rajapinta_lammoneriste_tuulensuoja.csv
 - noin 0,6 m alaohjauspuun yläpuolella, runkotolppien puolivälissä, mineraalivillaeristeen ja tuulensuojan rajapinnassa
@@ -46,17 +52,14 @@ nurkka_alaohjauspuu_runkotolppa_tuulensuoja_alhaalla_oikealla.csv
 kulma_runkotolppa_tuulensuoja_oikealla_ylhaalla.csv
 - runkotolpan ja tuulensuojalevyn kulmassa, noin 0,3 m yläjuoksusta alaspäin
 
-sisailma.csv
-- sisäilman olosuhteiden mittaus, lähellä lattianrajaa
-
 tuuletusvali.csv
 - tuuletusväli tuulensuojalevyn ja tiiliverhouksen välissä
 
 
 
-
 # Mittalaite
-Rotronic HL-NT2 -dataloggeri ja HygroClip2-mittapää.
+
+- Rotronic HL-NT2 -dataloggeri ja HygroClip2-mittapää
 
 
 
